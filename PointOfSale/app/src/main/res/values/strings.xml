@@ -13,4 +13,5 @@
     <string name="confirmation_dialog_message">Are you sure you want to remove all items?</string>
     <string name="edit">Edit</string>
     <string name="add_item">Add an Item</string>
+    <string name="choose_an_item">Choose an Item</string>
 </resources>
