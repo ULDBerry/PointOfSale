@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mNameTextView, mQuantityTextView, mDateTextView;
     private Item mCurrentItem;
+    private Item mClearedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +65,31 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch(item.getItemId()){
             case R.id.menu_reset:
+                mClearedItem = mCurrentItem;
                 mCurrentItem = new Item();
                 showCurrentItem();
+
+                //Snack bar
+
+                final Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator_layout),
+                        "Item cleared",Snackbar.LENGTH_LONG );
+                snackbar.setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //undo
+                        mCurrentItem = mClearedItem;
+                        showCurrentItem();
+                        Snackbar.make(findViewById(R.id.coordinator_layout),
+                                "Item Restored", snackbar.LENGTH_SHORT).show();
+
+                    }
+                });
+                snackbar.show();
+
                 return true;
             case R.id.action_settings:
-                //This can be any settings 
+                //This can be any settings
                 startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
 
                 return true;
