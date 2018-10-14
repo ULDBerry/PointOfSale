@@ -55,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                addItem();
+                insertItem(false);
 
             }
         });
     }
 
-    private void addItem() {
+    private void insertItem(final boolean isEdit) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //Make your dialog
@@ -76,21 +76,32 @@ public class MainActivity extends AppCompatActivity {
         final CalendarView deliveryDateView = view.findViewById(R.id.calendar_view);
         final GregorianCalendar calendar = new GregorianCalendar();
 
+        if (isEdit){
+            nameEditText.setText(mCurrentItem.getName());
+            quantityEditText.setText(""+ mCurrentItem.getQuantity());
+            deliveryDateView.setDate(mCurrentItem.getDeliveryDateTime());
+        }
+
         deliveryDateView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 calendar.set(year, month, dayOfMonth);
             }
         });
-
         builder.setNegativeButton(android.R.string.cancel,null);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String name = nameEditText.getText().toString();
                 int quantity = Integer.parseInt(quantityEditText.getText().toString());
-                mCurrentItem = new Item(name, quantity, calendar);
-                mItems.add(mCurrentItem);
+                if (isEdit){
+                    mCurrentItem.setName(name);
+                    mCurrentItem.setQuantity(quantity);
+                    mCurrentItem.setDeliveryDate(calendar);
+                }else {
+                    mCurrentItem = new Item(name, quantity, calendar);
+                    mItems.add(mCurrentItem);
+                }
                 showCurrentItem();
             }
         });
@@ -120,16 +131,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            //Context menu edit item
             case R.id.action_edit:
-
-
-
-                return true;
+            insertItem(true);
+            return true;
+            //Context menu remove an item
             case R.id.action_remove:
+            mItems.remove(mCurrentItem);
+            mCurrentItem = new Item();
 
-                
 
-                return true;
+            return true;
 
 
         }
