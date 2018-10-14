@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ie.ul.daveberry.pointofsale.MainActivity">
+    <item
+    android:id="@+id/action_edit"
+    android:title="Edit"
+    android:orderInCategory="100"
+    android:icon="@android:drawable/ic_menu_edit"
+    app:showAsAction="ifRoom"
+    />
+    <item
+        android:id="@+id/action_remove"
+        android:title="Remove"
+        android:orderInCategory="100"
+        android:icon="@android:drawable/ic_menu_delete"
+        app:showAsAction="ifRoom"
+        />
+</menu>

@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         mQuantityTextView = findViewById(R.id.quantity_text);
         mDateTextView = findViewById(R.id.date_text);
         mItems = new ArrayList<>();
+
+        //Context menu
+        registerForContextMenu(mNameTextView);
 
         mItems.add(new Item("Order 1",30, new GregorianCalendar()));
         mItems.add(new Item("Order 2",40, new GregorianCalendar()));
@@ -105,6 +109,35 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.menu_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_edit:
+
+
+
+                return true;
+            case R.id.action_remove:
+
+                
+
+                return true;
+
+
+        }
+
+
+
+        return super.onContextItemSelected(item);
+
     }
 
     @Override
