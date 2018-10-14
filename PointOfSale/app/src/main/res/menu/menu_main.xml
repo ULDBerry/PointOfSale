@@ -15,10 +15,16 @@
         app:showAsAction="ifRoom"
        />
     <item
-        android:id="@+id/action_search"
-        android:title="Search"
+    android:id="@+id/action_search"
+    android:title="Search"
+    android:orderInCategory="100"
+    android:icon="@android:drawable/ic_menu_search"
+    app:showAsAction="ifRoom"
+    />
+    <item
+        android:id="@+id/action_clearall"
+        android:title="Clear All"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
 </menu>
