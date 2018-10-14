@@ -1,6 +1,8 @@
 package ie.ul.daveberry.pointofsale;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         mNameTextView.setText(mCurrentItem.getName());
         mQuantityTextView.setText(getString(R.string.quantity_format, mCurrentItem.getQuantity()));
         mDateTextView.setText(getString(R.string.date_format, mCurrentItem.getDeliveryDateString()));
-  
+
     }
 
     @Override
@@ -60,11 +62,16 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch(item.getItemId()){
+            case R.id.menu_reset:
+                mCurrentItem = new Item();
+                showCurrentItem();
+                return true;
+            case R.id.action_settings:
+                //This can be any settings 
+                startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
